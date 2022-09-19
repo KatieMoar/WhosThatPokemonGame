@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/style.css">
+
+	<title>Who's That Pokemon Game</title>
+</head>
+<body>
+
+		<h1 class="title">Who's That Pokemon?!</h1>
+		<div class="score">
+			<h3>Score</h3>
+			<span class="counter">0</span>
+			<h3>Remaining Cards</h3>
+			<span><span class="card-tally"></span>/151</span>
+		</div>
+		<div class="all-card-container" id="all-cards-container"></div>
+
+		<div class="inputs">
+			<form class="poke-form">
+				<span class="error-message"></span>
+				<input id="poke-name" type="text" placeholder="Who's That Pokemon??" name="poke-name" autocomplete="off" autofocus>
+				<button class="enter">Enter</button>
+			</form>
+			<button class="next-card hidden" >Next</button>
+		</div>
+		<button id="hints">HINTS</button>
+		<button id="reset">New Game</button>
+
+	<script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>

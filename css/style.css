@@ -1,0 +1,287 @@
+/* Box Model Hack */
+* {
+     padding: 0;
+     margin: 0;
+     box-sizing: border-box;
+}
+
+/* ------------------- FONTS ------------------ */
+@font-face {
+     font-family: 'pokemongb-raeo-webfont';
+     src: url('../fonts/pokemongb-raeo-webfont.woff2') format('woff2'),
+          url('../fonts/pokemongb-raeo-webfont.woff') format('woff');
+     font-weight: normal;
+     font-style: normal;
+   }
+
+@font-face {
+     font-family: 'pokemonsolidnormal-xywr-webfont';
+     src: url('../fonts/pokemonsolidnormal-xywr-webfont.woff2') format('woff2'),
+          url('../fonts/pokemonsolidnormal-xywr-webfont.woff') format('woff');
+     font-weight: normal;
+     font-style: normal;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins&display=swap');
+/* ----------- Poppins and Open Sans ---------- */
+
+/* font-family: 'Open Sans', sans-serif;
+font-family: 'Poppins', sans-serif; */
+
+
+:root {
+     font-size: 62.5%;
+}
+
+.hidden {
+     display: none;
+}
+
+
+
+/* -------------------------------------------- */
+/*                  BASE STYLES                 */
+/* -------------------------------------------- */
+
+body {
+     background-color: #679F9F;
+     display: flex;
+     flex-direction: column;
+     margin: 3rem;
+     font-family: 'pokemongb-raeo-webfont', 'sans-serif';
+
+}
+
+.title {
+     font-family: 'pokemonsolidnormal-xywr-webfont', 'sans-serif';
+     letter-spacing: 1.5rem;
+     text-align: center;
+     font-size: 5rem;
+     color: #fff;
+     text-shadow: 
+     5px 5px 0px #eb452b, 
+     10px 10px 0px #efa032, 
+     15px 15px 0px #46b59b, 
+     20px 20px 0px #017e7f, 
+     25px 25px 0px #052939;
+     margin: 2rem 0 3rem;
+}
+
+.front-face .back-text {
+     position: relative;
+     bottom: 20px;
+}
+
+.front-face h3 {
+     font-size: 2rem;
+     margin: 1rem;
+}
+
+.front-face .back-text span {
+     font-size: 1rem;
+     margin: 1rem 0;
+     line-height: 2rem;
+}
+
+
+img {
+     width: 60%;
+     height: 60%;
+}
+
+
+.all-card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2rem;
+    perspective: 20000px;
+}
+
+.poke-card {
+     height: 400px;
+     width: 400px;
+     border-radius: 10px;
+     position: relative;
+     margin: 5px;
+     transform-style: preserve-3d;
+     transform: scale(.97);
+     transition: 0.5s;
+}
+
+.poke-card:hover {
+     cursor: pointer;
+}
+
+.poke-card.flip {
+     transform: rotateY(-180deg);
+}
+
+.front-face,
+.back-face {
+     position: absolute;
+     width: 100%;
+     height: 100%;
+     padding: 20px;
+     border-radius: 5px;
+     background-color: beige;
+     backface-visibility: hidden;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+}
+
+
+.front-face {
+     transform: rotateY(-180deg);
+     text-align: center;
+     justify-content: center;
+}
+
+.back-face {
+     text-align: center;
+     justify-content: center;
+}
+
+.back-face span {
+     font-family: 'Poppins', sans-serif;
+     margin: 30px 0;
+     font-size: 2rem;
+}
+
+.back-face h1 {
+     margin: 30px 0;
+     font-size: 3rem;
+}
+
+.types {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     width: 60%;
+}
+
+.types img {
+     width: 100%;
+     height: 60%;
+     margin-left: 5px;
+}
+
+/* -------------------------------------------- */
+/*                 POKEMON TYPES                */
+/* -------------------------------------------- */
+
+.bug {
+     border: 5px solid #A5BE20;
+}
+
+.dark {
+     border: 5px solid #6D594A;
+}
+
+.dragon {
+     border: 5px solid #7038F8;
+}
+
+.electric {
+     border: 5px solid #F2D535;
+}
+
+.fairy {
+     border: 5px solid #F948D7;
+}
+
+.fight {
+     border: 5px solid #B9222F;
+}
+
+.fire {
+     border: 5px solid #E87F38;
+}
+
+.flying {
+     border: 5px solid #AB84F0;
+}
+
+.ghost {
+     border: 5px solid #705898;
+}
+
+.grass {
+     border: 5px solid #7BCF4E;
+}
+
+.ground {
+     border: 5px solid #DBC469;
+}
+
+.ice {
+     border: 5px solid #98D8D8;
+}
+
+.normal {
+     border: 5px solid #A6AB78;
+}
+
+.poison {
+     border: 5px solid #9E27A1;
+}
+
+.psychic {
+     border: 5px solid #F85888;
+}
+
+.rock {
+     border: 5px solid #B8A038;
+}
+
+.steel {
+     border: 5px solid #B8B8D0;
+}
+
+.water {
+     border: 5px solid #7586F0;
+}
+
+/* -------------------------------------------- */
+/*                   SCROLLBAR                  */
+/* -------------------------------------------- */
+
+::-webkit-scrollbar {
+     width: 15px;
+   }
+   
+::-webkit-scrollbar-track {
+     background: #f1f1f1;
+   }
+   
+::-webkit-scrollbar-thumb {
+     background: #888;
+   }
+   
+::-webkit-scrollbar-thumb:hover {
+     background: #555;
+}
+
+@media screen and (max-width: 500px) {
+
+     body {
+          margin: 0;
+     }
+
+     img {
+          width: 60%;
+          height: 60%;
+     }
+
+     .title {
+          font-size: 3rem;
+     }
+
+     .poke-card {
+          height: 400px;
+          width: 100vw;
+     }
+}
