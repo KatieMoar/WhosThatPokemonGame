@@ -10,27 +10,47 @@
 	<title>Who's That Pokemon Game</title>
 </head>
 <body>
+	
 
 		<h1 class="title">Who's That Pokemon?!</h1>
-		<div class="score">
-			<h3>Score</h3>
-			<span class="counter">0</span>
-			<h3>Remaining Cards</h3>
-			<span><span class="card-tally"></span>/151</span>
-		</div>
-		<div class="all-card-container" id="all-cards-container"></div>
+		<div class="all-content-container">
+			<div class="left-container">
 
-		<div class="inputs">
-			<form class="poke-form">
-				<span class="error-message"></span>
-				<input id="poke-name" type="text" placeholder="Who's That Pokemon??" name="poke-name" autocomplete="off" autofocus>
-				<button class="enter">Enter</button>
-			</form>
-			<button class="next-card hidden" >Next</button>
-		</div>
-		<button id="hints">HINTS</button>
-		<button id="reset">New Game</button>
+				<div class="non-input-btns">
+					<button id="hints">Hint</button>
+					<button id="reset">New Game</button>
+					<button class="next-card hidden">Next</button>
+				</div>
 
+				<div class="tallies">
+					<div class="score">
+						<h3>Score</h3>
+						<span class="counter">0</span>
+					</div>
+					<div class="remaining-cards">
+						<h3>Remaining Cards</h3>
+						<span><span class="card-tally"></span>/151</span>
+					</div>
+				</div>
+
+
+
+				<div class="inputs">
+					<form class="poke-form">
+						<div class="name-input">
+							<input id="poke-name" type="text" placeholder="Who's That Pokemon??" name="poke-name" autocomplete="off" autofocus>
+							<button class="enter">Enter</button>
+						</div>
+						<span class="result-message"></span>
+					</form>
+
+		
+				</div>
+			</div>
+			<div class="right-container">
+				<div class="all-card-container" id="all-cards-container"></div>
+			</div>
+		</div>
 	<script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>

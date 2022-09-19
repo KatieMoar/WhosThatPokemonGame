@@ -1,6 +1,4 @@
 
-
-
 const container = document.getElementById('all-cards-container')
 const hintButton = document.getElementById('hints')
 const resetButton = document.getElementById('reset')
@@ -55,22 +53,14 @@ async function randomUnique (range, count) {
     await fetchPkm(numsArr)
 }
 
-/* -------------------------------------------- */
-/*             PROBLEM SECTION START            */
-/* -------------------------------------------- */
 
 async function fetchPkm(numsArr) { 
-    console.log(numsArr)
     let firstNumber = numsArr.shift()
     document.querySelector('.next-card').onclick = function() {
         localStorage.setItem('idNumbers', JSON.stringify(numsArr))
      }
     await getPkm(firstNumber)
 }
-
-/* -------------------------------------------- */
-/*             PROBLEM SECTION ENDS             */
-/* -------------------------------------------- */
 
 async function getPkm(id) {
     const url = `https://pokeapi.co/api/v2/pokemon/${id}`
@@ -91,10 +81,9 @@ async function getSpec(id) {
 function createPokemonCard(pokemon, spec) {
     let pokemonEl = document.createElement('div')
     pokemonEl.classList.add('poke-card')
-    console.log(pokemon.name)
     let form = document.querySelector(".poke-form");
 
-    let errorMessage = document.querySelector(".error-message")
+    let resultMessage = document.querySelector(".result-message")
 
 
 
@@ -114,39 +103,43 @@ function createPokemonCard(pokemon, spec) {
     let input = formdata.get("poke-name");
     
     if(input.length <= 0) {
-
+        enterButton.disabled = false
     } else {
         pokemonEl.classList.toggle('flip')
         nextCard.classList.remove('hidden')
         enterButton.classList.add('hidden')
-
-
-
+        enterButton.disabled = true
 
         if (pokemon.name === 'mr-mime') {
             if(input.toLowerCase() === "mr.mime" || input.toLowerCase() === "mr-mime" || input.toLowerCase() === "mr mime") {
-                console.log('win')
+                resultMessage.innerText = "Correct"
+                resultMessage.classList.add("correct-text")
                 botScoreVal += 1
                 localStorage.setItem('botScore' , botScoreVal)  
             }
         } else if(pokemon.name === 'nidoran-f') {
             if(input.toLowerCase() === "nidoran" || input.toLowerCase() === "nidoran f" || input.toLowerCase() === "nidoranf"){
-                console.log('win')
+                resultMessage.innerText = "Correct"
+                resultMessage.classList.add("correct-text")
                 botScoreVal += 1
                 localStorage.setItem('botScore' , botScoreVal) 
             }
         } else if(pokemon.name === 'nidoran-m') {
             if(input.toLowerCase() === "nidoran" || input.toLowerCase() === "nidoran m" || input.toLowerCase() === "nidoranm"){
-                console.log('win')
+                resultMessage.innerText = "Correct"
+                resultMessage.classList.add("correct-text")
                 botScoreVal += 1
                 localStorage.setItem('botScore' , botScoreVal) 
             }
         } else if(input.toLowerCase() === pokemon.name.toLowerCase()){
-            console.log('win')
+            resultMessage.innerText = "Correct"
+            resultMessage.classList.add("correct-text")
             botScoreVal += 1
             localStorage.setItem('botScore' , botScoreVal)
         } else if (input.toLowerCase() !== pokemon.name.toLowerCase()) {
-            errorMessage.innerText = "Wrong"
+            resultMessage.classList.add("incorrect-text")
+            resultMessage.innerText = "Incorrect"
+
         }
     }
     count.innerHTML = `${botScoreVal}` 
@@ -154,12 +147,12 @@ function createPokemonCard(pokemon, spec) {
     for (var i = 0, len = elements.length; i < len; ++i) {
         elements[i].readOnly = true;
     }
-    enterButton.disabled = true
+
 
     nextCard.addEventListener("click", () => {
         console.log('edfd')
         nameReset.value = ""
-        errorMessage.innerText = ""
+        resultMessage.innerText = ""
         tallyValue -= 1
         localStorage.setItem('remainingCards' , tallyValue) 
         document.location.reload(true)
@@ -285,4 +278,6 @@ function createPokemonCard(pokemon, spec) {
 
 
 }
+
+
 

@@ -38,7 +38,9 @@ font-family: 'Poppins', sans-serif; */
 }
 
 
-
+/* -------------------------------------------- */
+/*            BASE POKEMON API STYLES           */
+/* -------------------------------------------- */
 /* -------------------------------------------- */
 /*                  BASE STYLES                 */
 /* -------------------------------------------- */
@@ -109,10 +111,6 @@ img {
      transform-style: preserve-3d;
      transform: scale(.97);
      transition: 0.5s;
-}
-
-.poke-card:hover {
-     cursor: pointer;
 }
 
 .poke-card.flip {
@@ -264,6 +262,135 @@ img {
 ::-webkit-scrollbar-thumb:hover {
      background: #555;
 }
+
+
+
+/* -------------------------------------------- */
+/*             WHOS THAT POKEMON CSS            */
+/* -------------------------------------------- */
+
+.all-content-container {
+     display: flex;
+     justify-content: center;
+     align-items: center; 
+
+}
+
+.left-container, 
+.right-container {
+     height: 500px;
+     width: 500px;
+
+}
+
+.left-container {
+     display: flex;
+     flex-direction: column;
+     padding: 15px;
+     position: relative;
+}
+
+.tallies .score,
+.tallies .remaining-cards {
+     padding: 10px 0;
+}
+
+.tallies span {
+     font-size: 2.5rem;
+}
+
+.tallies h3 {
+     font-size: 1.3rem;
+     margin: 15px 0;
+     text-transform: uppercase;
+     letter-spacing: 0.3rem;
+}
+
+.non-input-btns {
+     display: flex;
+     flex-direction: column;
+     align-items: flex-end;
+     position: absolute;
+     width: 100%;
+     padding: 0 15px;
+}
+
+.non-input-btns button {
+     cursor: pointer;
+     border-radius: 10px;
+     width: 30%;
+     height: 50px;
+     margin: 5px 0;
+     transition: all 0.5s ease-in-out;
+     border: none;
+}
+
+.non-input-btns button:hover {
+     background-color: #E23835;
+     color: white;
+     border: none;
+}
+
+.poke-form {
+     margin: 4rem 0;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+}
+
+.poke-form .name-input input{
+     height: 30px;
+     width: 70%;
+     border: none;
+     padding: 10px;
+     font-size: 1.5rem;
+     letter-spacing: 0.2rem;
+     text-transform: uppercase;
+}
+
+.poke-form .name-input input::placeholder{
+     font-size: 1.3rem;
+     color: #6DA09E;
+}
+
+.poke-form .name-input input:focus{
+     border: none;
+     outline: none;
+}
+
+.poke-form .name-input button {
+     cursor: pointer;
+     border-radius: 10px;
+     width: 20%;
+     height: 30px;
+     margin: 5px 0;
+     transition: all 0.5s ease-in-out;
+     border: none;
+}
+
+.poke-form button:hover {
+     background-color: #E23835;
+     color: white;
+     border: none;
+}
+
+.poke-form .result-message {
+     font-size: 2rem;
+     margin: 15px 0;
+     text-transform: uppercase;
+     letter-spacing: 0.3rem;
+}
+
+.correct-text {
+     color: #9AE955;
+}
+
+.incorrect-text {
+     color: #F24259;
+}
+
+
+
 
 @media screen and (max-width: 500px) {
 
