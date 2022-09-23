@@ -6,6 +6,38 @@ const typeContainer = document.getElementById('pokemonTypes')
 const count = document.querySelector('.counter')
 const cardTally = document.querySelector('.card-tally')
 
+// const pkmNumber = 151
+
+// async function multiFetchPkm() {
+//     for (let i = 1; i <= pkmNumber; i++){
+//         getPkmName(i)
+//     }
+// }
+
+
+// async function createName(pokemon){
+//     let nameContainer = document.getElementById('name-container')
+//     let nameEl = document.createElement('div')
+//     let showPokemon = document.getElementById('show-pokemon')
+//     nameEl.classList.add('hidden')
+//     nameEl.classList.add('names')
+
+
+
+
+//     const nameInnerHTML = `
+//     ${pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
+// `
+// nameEl.innerHTML = nameInnerHTML
+// nameContainer.appendChild(nameEl)
+
+
+//}
+
+
+
+
+
 
 
 resetButton.addEventListener('click', resetScore)
@@ -42,6 +74,22 @@ if (!localStorage.getItem('idNumbers')){
     fetchPkm(idNumberArray)
 }
 
+async function sortNameArray() {
+    const url = "https://pokeapi.co/api/v2/pokemon/?&limit=151"
+    const res = await fetch(url)
+    const pokemonFull = await res.json()
+    let nameArr = []
+    let results = pokemonFull.results
+    for(let i = 0; i < results.length; i++){
+        nameArr.push(results[i].name)
+    }
+
+    return nameArr
+
+
+}
+
+
 
 async function randomUnique (range, count) {
     let nums = new Set();
@@ -52,6 +100,8 @@ async function randomUnique (range, count) {
     localStorage.setItem('idNumbers', JSON.stringify(numsArr));
     await fetchPkm(numsArr)
 }
+
+
 
 
 async function fetchPkm(numsArr) { 
@@ -67,7 +117,10 @@ async function getPkm(id) {
     const res = await fetch(url)
     const pokemon = await res.json()
     const spec = await getSpec(id)
-    createPokemonCard(pokemon,spec)
+    const allNames = await sortNameArray()
+
+
+    createPokemonCard(pokemon,spec, allNames)
 }
 
 async function getSpec(id) {
@@ -78,26 +131,31 @@ async function getSpec(id) {
 }
 
 
-function createPokemonCard(pokemon, spec) {
+function createPokemonCard(pokemon, spec, allNames) {
     let pokemonEl = document.createElement('div')
     pokemonEl.classList.add('poke-card')
     let form = document.querySelector(".poke-form");
-
     let resultMessage = document.querySelector(".result-message")
-
-
-
-/* -------------------------------------------- */
-/*             PROBLEM SECTION START            */
-/* -------------------------------------------- */
     let nextCard = document.querySelector('.next-card')
     let nameReset = document.querySelector('#poke-name')
     let enterButton = document.querySelector('.enter')
-    
 
+
+    for(let i = 0; i < allNames.length; i++){
+        let nameContainer = document.querySelector('#name-container')
+        let nameEl = document.createElement('span')
+        nameEl.classList.add('names')
+        let nameInnerHTML = `
+         ${allNames[i].charAt(0).toUpperCase() + allNames[i].slice(1)}
+         `
+        nameEl.innerHTML = nameInnerHTML
+        nameContainer.appendChild(nameEl)
+        
+    }
 
     form.addEventListener("submit", function (e) {
         e.preventDefault()
+
     
     let formdata = new FormData(this);
     let input = formdata.get("poke-name");
@@ -136,21 +194,71 @@ function createPokemonCard(pokemon, spec) {
             resultMessage.classList.add("correct-text")
             botScoreVal += 1
             localStorage.setItem('botScore' , botScoreVal)
+
+
+            let findName = document.querySelectorAll('.names')
+            for(let i = 0; i < findName.length; i++){
+                if(findName[i].innerText.toLowerCase() === (pokemon.name.toLowerCase())){
+                    findName[i].classList.add('strike-in')
+
+                }
+            }
+
+
+            
         } else if (input.toLowerCase() !== pokemon.name.toLowerCase()) {
             resultMessage.classList.add("incorrect-text")
             resultMessage.innerText = "Incorrect"
 
+            // findName[i].classList.add('strike-in')
+            //finalNameArr is pushed to the DOM as a list of spans with the classes of .names
+            let findName = document.querySelectorAll('.names')
+            let finalNameArr = []
+            for(let i = 0; i < findName.length; i++){
+                if(findName[i].innerText.toLowerCase() === (pokemon.name.toLowerCase())){
+                    let finalName = findName[i].innerText.toLowerCase()
+                    finalNameArr.push(finalName)
+                    let strike =  localStorage.getItem('strike')
+                    if(strike === null){
+
+                    } else {
+                        console.log(strike.toString())
+                    }
+                }
+            }
+            const strikeName = () => {
+                const strikeName = window.localStorage.getItem('strike')
+                if(strikeName === null){
+                    window.localStorage.setItem('strike', JSON.stringify(finalNameArr))
+                } else {
+                    const getCurrentName = window.localStorage.getItem('strike')
+                    const currentName = JSON.parse(getCurrentName)
+
+                    currentName.push(finalNameArr)
+
+                    window.localStorage.setItem('strike', JSON.stringify(currentName))
+                }
+            }
+            strikeName()
+
         }
     }
+
+
+
+
+
+
+    
     count.innerHTML = `${botScoreVal}` 
-    var elements = form.elements;
+
+    const elements = form.elements;
     for (var i = 0, len = elements.length; i < len; ++i) {
         elements[i].readOnly = true;
     }
 
 
     nextCard.addEventListener("click", () => {
-        console.log('edfd')
         nameReset.value = ""
         resultMessage.innerText = ""
         tallyValue -= 1
@@ -161,11 +269,7 @@ function createPokemonCard(pokemon, spec) {
 
     }, {once : true})
 
-/* -------------------------------------------- */
-/*             PROBLEM SECTION ENDS             */
-/* -------------------------------------------- */
 
-    //CODE DOWN HERE DOESNT REALLY MATTER
 
     let types = []
 
@@ -272,12 +376,14 @@ function createPokemonCard(pokemon, spec) {
             </div>
         </div>
     `
+
+
     
     pokemonEl.innerHTML = cardInnerHtml
     container.appendChild(pokemonEl)
 
-
 }
+
 
 
 
